@@ -3,6 +3,7 @@ hunter_douglas_main <- read.csv("~/Desktop/Spring Term/Project Course/Hunter Dou
 
 table(hunter_douglas_main$PRODUCT_CATEGORY, hunter_douglas_main$ORIGINAL_PLANT)
 
+# selected: 02 Silhouette/Nantucket, Plant: G
 hunter_sil <- hunter_douglas_main[hunter_douglas_main$PRODUCT_CATEGORY == '02 Silhouette/Nantucket' & hunter_douglas_main$ORIGINAL_PLANT == 'G', ]
 summary(hunter_sil)
 
