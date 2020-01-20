@@ -7,3 +7,6 @@ table(hunter_douglas_main$PRODUCT_CATEGORY, hunter_douglas_main$ORIGINAL_PLANT)
 hunter_sil <- hunter_douglas_main[hunter_douglas_main$PRODUCT_CATEGORY == '02 Silhouette/Nantucket' & hunter_douglas_main$ORIGINAL_PLANT == 'G', ]
 summary(hunter_sil)
 
+# clean data
+
+
