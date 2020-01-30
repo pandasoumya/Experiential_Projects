@@ -8,4 +8,9 @@ sil <- sil[!is.na(sil$FABRIC_ID),] #get rid of NULL fabric IDs
 sil <- sil[(sil$ORIGINAL_ORDER %in% sil$SALES_ORDER),] # drop rep/rem/crr orders with no og order
 sil <- sil[sil$ORDER_REASON_ID=="STD" | sil$ORDER_REASON_ID=="REM" | sil$ORDER_REASON_ID=="REP" |sil$ORDER_REASON_ID=="CON" ,]
 sil$ORDER_REASON_ID <- factor(sil$ORDER_REASON_ID)
-
+sil$RESPONSIBILITY_CODE_ID <- as.character(sil$RESPONSIBILITY_CODE_ID)
+sil$RESPONSIBILITY_CODE_ID[is.na(sil$RESPONSIBILITY_CODE_ID)] <- "NULL"
+sil$REASON_CODE_ID <- as.character(sil$REASON_CODE_ID)
+sil$REASON_CODE_ID[is.na(sil$REASON_CODE_ID)] <- "NULL"
+sil$REASON_CODE <- as.character(sil$REASON_CODE)
+sil$REASON_CODE[is.na(sil$REASON_CODE)] <- "NULL"
