@@ -1,3 +1,5 @@
+rm(list = ls())
+
 hd <- read.csv("Hunter Douglas Quality Data.csv", na.strings = c("NULL",""))
 df <- as.data.frame(hd)
 sil <- df[df$PRODUCT_CATEGORY == '02 Silhouette/Nantucket' & df$ORIGINAL_PLANT == 'G',]
@@ -21,3 +23,6 @@ sil$SLAT_SIZE <- NULL
 colSums(is.na(sil)) # returns all NA values in each column
 
 # NOTE: There are still 25 NULL values in REGION_STATE_ID that may or may not be relevant to your model
+
+# Find frequency of value : data.frame(with(sil, table(SOLD_TO_ID)[SOLD_TO_ID]))
+
