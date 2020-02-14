@@ -26,3 +26,27 @@ colSums(is.na(sil)) # returns all NA values in each column
 
 # Find frequency of value : data.frame(with(sil, table(SOLD_TO_ID)[SOLD_TO_ID]))
 
+
+######################Code below need to be verified############
+
+sil$ORIGINAL_ORDER1 <- paste0(sil$ORIGINAL_ORDER,sil$ORIGINAL_ORDER_LINE)
+#combine sales order and sales order line
+sil$SALES_ORDER1 <- paste0(sil$SALES_ORDER,sil$SALES_ORDER_LINE)
+sil <- sil[(sil$ORIGINAL_ORDER %in% sil$SALES_ORDER),] # drop rep/rem/crr orders with no og order
+sil <- sil[!sil$NET_SALES_UNITS<0,]
+dupes <- sil[duplicated(sil$SALES_ORDER1),]
+good_stuff <- sil[!(sil$SALES_ORDER1 %in% dupes$SALES_ORDER1 & sil$NET_SALES_UNITS == 0),]
+sil <- good_stuff[!duplicated(good_stuff$SALES_ORDER1),]
+sil.cp <- sil
+sil1<-merge(sil,sil.cp,by.x='ORIGINAL_ORDER1',by.y='SALES_ORDER1')
+sil[(sil$ORDER_REASON_ID=="REP" | sil$ORDER_REASON_ID=="REM")&!(sil$ORIGINAL_ORDER1 %in% sil$SALES_ORDER1),]
+head(sil1)
+
+library('plyr')
+COLOR_ID_COUNT<- count(sil$COLOR_ID)
+color_sort<-sort(COLOR_ID_COUNT$freq, decreasing = T)
+top50<- head(color_sort, 50)
+top50
+top50_colors <- sil[sil$COLOR_ID %in% top50, ]
+top50_colors$COLOR_ID <- sil[!sil$COLOR_ID %in% top50, ]
+COLOR_ID_TOP50 <- COLOR_ID_COUNT[COLOR_ID_COUNT$freq ]
